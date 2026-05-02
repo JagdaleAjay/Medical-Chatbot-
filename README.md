@@ -87,7 +87,7 @@ open up localhost: XXXX
 ## STEP 03 - Create ECR repo to store/save docker image
 
 ```bash
-- Save the URI: 315865595366.dkr.ecr.us-east-1.amazonaws.com/medicalbot
+- Save the URI: 3501479501781.dkr.ecr.ap-southeast-2.amazonaws.com/medicalbot
 ```
 
 ## STEP 04 - Create EC2 machine (Ubuntu)
