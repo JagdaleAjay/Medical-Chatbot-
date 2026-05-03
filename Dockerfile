@@ -1,16 +1,9 @@
-FROM python:3.10-slim
+FROM python:3.10-slim-buster
 
 WORKDIR /app
 
-# Copy and install dependencies
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY . /app
 
-# Copy all source code
-COPY . .
+RUN pip install -r requirements.txt
 
-# Expose the port your app runs on
-EXPOSE 8080
-
-# Start the app (change app.py to your actual entry point)
-CMD ["python", "app.py"]
+CMD ["python3", "app.py"]
