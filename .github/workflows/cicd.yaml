@@ -32,10 +32,15 @@ jobs:
         shell: bash
         run: |
           set -e
-          BUILD_CONTEXT=$(echo "$GITHUB_WORKSPACE" | tr -d '\r')
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG "$BUILD_CONTEXT"
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+          REGISTRY=$(echo "$ECR_REGISTRY" | tr -d '[:space:]')
+          REPO=$(echo "$ECR_REPOSITORY" | tr -d '[:space:]')
+          TAG=$(echo "$IMAGE_TAG" | tr -d '[:space:]')
+          IMAGE="$REGISTRY/$REPO:$TAG"
+          echo "Building image: $IMAGE"
+          echo "Working dir: $(pwd)"
+          docker build -t "$IMAGE" .
+          docker push "$IMAGE"
+          echo "image=$IMAGE" >> $GITHUB_OUTPUT
 
   Continuous-Deployment:
     needs: Continuous-Integration
